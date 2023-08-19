@@ -84,16 +84,14 @@
 
 
 <script>
-
-
-    const greetingElement = document.getElementById("greeting");
-    const loggedInContent = document.getElementById("loggedInContent");
-    const locationForm = document.getElementById("locationForm");
-    const latitudeInput = document.getElementById("latitude");
-    const longitudeInput = document.getElementById("longitude");
-    
     function LoggedIn(user) {
 
+        const greetingElement = document.getElementById("greeting");
+        const loggedInContent = document.getElementById("loggedInContent");
+        const locationForm = document.getElementById("locationForm");
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        
         if (user) {
             // User is logged in
             console.log("User is logged in 2:", user.displayName);
