@@ -41,6 +41,15 @@
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...
+
+          console.log("User is logged in:", user.displayName);
+          
+          // remove login buttons
+          const loginButton = document.getElementById("loginButton");
+          if (loginButton) {
+              loginButton.style.display = "none";
+          }
+          
       })
       .catch((error) => {
           // Handle Errors here.
@@ -52,6 +61,20 @@
           const credential = FacebookAuthProvider.credentialFromError(error);
 
           // ...
+
+          console.log("User is not logged in");
+
+          // Show the login button and add a click event listener
+          const loginButton = document.getElementById("loginButton");
+          loginButton.style.display = "block"; // Display the button
+          loginButton.addEventListener("click", () => {
+              signInWithFacebook(); // Call your function to open the login popup
+          });
+      
       });
   
 </script>
+
+
+<button id="loginButton">Log In with Facebook</button>
+
