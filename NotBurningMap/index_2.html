@@ -60,14 +60,16 @@
               // Handle Errors here.
               const errorCode = error.code;
               const errorMessage = error.message;
+
+              console.log("Error message " + error.code + " " + error.message);
               // The email of the user's account used.
-              const email = error.customData.email;
+              //const email = error.customData.email;
               // The AuthCredential type that was used.
               const credential = FacebookAuthProvider.credentialFromError(error);
 
               // ...
 
-              console.log("User is not logged in");
+              console.log("User is not logged in ");
 
               // Show the login button and add a click event listener
               const loginButton = document.getElementById("loginButton");
@@ -94,7 +96,7 @@
 
         if (user) {
             // User is logged in
-            console.log("User is logged in:", user.displayName);
+            console.log("User is logged in 2:", user.displayName);
             // You can show other content or features for logged-in users here
             greetingElement.textContent = "Hello " + user.displayName;
 
@@ -131,26 +133,28 @@
                     console.error("Error updating location:", error);
                 });
             });
-    }
-        
-    // Check if the user is logged in
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            
-            LoggedIn(user);
-
-        } else {
-            // User is not logged in
-            console.log("User is not logged in");
-
-            // Show the login button and add a click event listener
-            const loginButton = document.getElementById("loginButton");
-            loginButton.style.display = "block"; // Display the button
-            loginButton.addEventListener("click", () => {
-                signInWithFacebook(); // Call your function to open the login popup
-            });
         }
-    });
+
+        // Check if the user is logged in
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+
+                LoggedIn(user);
+
+            } else {
+                // User is not logged in
+                console.log("User is not logged in 2");
+
+                // Show the login button and add a click event listener
+                const loginButton = document.getElementById("loginButton");
+                loginButton.style.display = "block"; // Display the button
+                loginButton.addEventListener("click", () => {
+                    signInWithFacebook(); // Call your function to open the login popup
+                });
+            }
+        });
+    }
+
 </script>
 
 
