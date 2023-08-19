@@ -53,6 +53,7 @@
               if (loginButton) {
                   loginButton.style.display = "none";
               }
+              LoggedIn(user);
 
           })
           .catch((error) => {
@@ -89,8 +90,8 @@
     const latitudeInput = document.getElementById("latitude");
     const longitudeInput = document.getElementById("longitude");
     
-    // Check if the user is logged in
-    firebase.auth().onAuthStateChanged(user => {
+    function LoggedIn(user) {
+
         if (user) {
             // User is logged in
             console.log("User is logged in:", user.displayName);
@@ -130,7 +131,13 @@
                     console.error("Error updating location:", error);
                 });
             });
-
+    }
+        
+    // Check if the user is logged in
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            
+            LoggedIn(user);
 
         } else {
             // User is not logged in
