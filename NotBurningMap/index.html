@@ -1,25 +1,28 @@
-<!-- Add this to your HTML -->
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-<script>
-    // Initialize Firebase with your project's config
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_AUTH_DOMAIN",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_STORAGE_BUCKET",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
-    };
-    firebase.initializeApp(firebaseConfig);
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Initialize Firestore
-    const firestore = firebase.firestore();
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBSA8KMocg7ik3eNK02CV6d3C-yMNi8n0c",
+        authDomain: "not-burning-map.firebaseapp.com",
+        projectId: "not-burning-map",
+        storageBucket: "not-burning-map.appspot.com",
+        messagingSenderId: "305640361948",
+        appId: "1:305640361948:web:aa86d08b16b8bded98c919",
+        measurementId: "G-QB64JHRNY2"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 </script>
 
 
-<!-- Add this to your HTML -->
 <script>
     const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
@@ -37,7 +40,6 @@
     }
 </script>
 
-<!-- Add this to your HTML -->
 <!-- Add the Leaflet CSS and JavaScript links -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
