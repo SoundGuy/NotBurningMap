@@ -1,0 +1,62 @@
+<!-- Add this to your HTML -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+<script>
+    // Initialize Firebase with your project's config
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Initialize Firestore
+    const firestore = firebase.firestore();
+</script>
+
+
+<!-- Add this to your HTML -->
+<script>
+    const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
+    function signInWithFacebook() {
+        firebase.auth().signInWithPopup(facebookProvider)
+            .then((result) => {
+                // Handle successful login
+                const user = result.user;
+                console.log("Logged in user:", user);
+                // You can now save user data to Firestore
+            })
+            .catch((error) => {
+                console.error("Error signing in with Facebook:", error);
+            });
+    }
+</script>
+
+<!-- Add this to your HTML -->
+<!-- Add the Leaflet CSS and JavaScript links -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<!-- Create a map container -->
+<div id="map"></div>
+
+<script>
+    // Initialize the map
+    const map = L.map('map').setView([0, 0], 2); // Set initial coordinates and zoom level
+
+    // Add a tile layer (you can choose different tile providers)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add markers for friends' locations
+    // You would need to fetch friends' locations from Firestore and iterate through them
+    // Example: Add a marker for a friend's location
+    const friendLocation = [latitude, longitude]; // Replace with actual coordinates
+    L.marker(friendLocation).addTo(map).bindPopup("Your friend's name");
+</script>
