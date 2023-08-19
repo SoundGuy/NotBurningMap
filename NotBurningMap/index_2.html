@@ -81,12 +81,57 @@
 
 
 <script>
+
+
+    const greetingElement = document.getElementById("greeting");
+    const loggedInContent = document.getElementById("loggedInContent");
+    const locationForm = document.getElementById("locationForm");
+    const latitudeInput = document.getElementById("latitude");
+    const longitudeInput = document.getElementById("longitude");
+    
     // Check if the user is logged in
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             // User is logged in
             console.log("User is logged in:", user.displayName);
             // You can show other content or features for logged-in users here
+            greetingElement.textContent = "Hello " + user.displayName;
+
+            loggedInContent.style.display = "block";
+
+            // Retrieve user's data from Firestore
+            const userId = user.uid;
+            const userDocRef = firestore.collection("users").doc(userId);
+
+            userDocRef.get().then(doc => {
+                if (doc.exists) {
+                    const userData = doc.data();
+                    // Populate form with user's lat/long data
+                    latitudeInput.value = userData.latitude || "";
+                    longitudeInput.value = userData.longitude || "";
+                }
+            });
+
+            // Handle form submission
+            locationForm.addEventListener("submit", event => {
+                event.preventDefault();
+
+                // Get new lat/long values from form
+                const newLatitude = latitudeInput.value;
+                const newLongitude = longitudeInput.value;
+
+                // Update user's lat/long in Firestore
+                userDocRef.update({
+                    latitude: newLatitude,
+                    longitude: newLongitude
+                }).then(() => {
+                    console.log("Location updated successfully");
+                }).catch(error => {
+                    console.error("Error updating location:", error);
+                });
+            });
+
+
         } else {
             // User is not logged in
             console.log("User is not logged in");
@@ -129,5 +174,20 @@
 </script>
 
 
+<div id="greeting">Hello . Please log in to continue</div>
+
 <button id="loginButton">Log In with Facebook</button>
+
+<div id="loggedInContent" style="display: none;">
+    <!-- HTML Form for Lat/Long -->
+    <form id="locationForm">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" required><br>
+
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" required><br>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
 
