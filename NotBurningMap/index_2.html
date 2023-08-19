@@ -60,6 +60,7 @@
               // IdP data available using getAdditionalUserInfo(result)
               // ...
 
+              // FIX? move all this to to status change?
               console.log("User is logged in:", user.displayName);
 
               // remove login buttons
@@ -67,6 +68,7 @@
               if (loginButton) {
                   loginButton.style.display = "none";
               }
+              
               LoggedIn(user);
 
           })
@@ -166,8 +168,8 @@
         // Check if the user is logged in
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("User is not logged in OnAuthStatusChange");
-                LoggedIn(user);
+                console.log("User is logged in OnAuthStatusChange");
+                //LoggedIn(user);
 
             } else {
                 // User is not logged in
