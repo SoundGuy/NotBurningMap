@@ -80,7 +80,28 @@
 </script>
 
 
-<!-- Add this to your HTML -->
+<script>
+    // Check if the user is logged in
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            // User is logged in
+            console.log("User is logged in:", user.displayName);
+            // You can show other content or features for logged-in users here
+        } else {
+            // User is not logged in
+            console.log("User is not logged in");
+
+            // Show the login button and add a click event listener
+            const loginButton = document.getElementById("loginButton");
+            loginButton.style.display = "block"; // Display the button
+            loginButton.addEventListener("click", () => {
+                signInWithFacebook(); // Call your function to open the login popup
+            });
+        }
+    });
+</script>
+
+
 <!-- Add the Leaflet CSS and JavaScript links -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
