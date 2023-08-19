@@ -31,8 +31,10 @@
   const provider = new FacebookAuthProvider();
 
   const auth = getAuth();
+  // Initialize Cloud Firestore and get a reference to the service
+  const db = firebase.firestore();
 
-  signInWithFacebook();
+  //signInWithFacebook();
   function signInWithFacebook() {
 
       signInWithPopup(auth, provider)
@@ -104,7 +106,7 @@
 
             // Retrieve user's data from Firestore
             const userId = user.uid;
-            const userDocRef = firestore.collection("users").doc(userId);
+            const userDocRef = db.collection("users").doc(userId);
 
             userDocRef.get().then(doc => {
                 if (doc.exists) {
