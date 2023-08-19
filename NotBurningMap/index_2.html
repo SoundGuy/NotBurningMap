@@ -132,8 +132,8 @@
             const userId = user.uid;
 
 
-            console.log("Getting user data for   " + user.uid);
-            getUserData(user.uid); 
+            console.log("Getting user data for   " + userId);
+            getUserData(userId); 
         /*    const userDocRef = db.collection("users").doc(userId);
             
             userDocRef.get().then(doc => {
@@ -153,15 +153,9 @@
                 const newLatitude = latitudeInput.value;
                 const newLongitude = longitudeInput.value;
 
-                // Update user's lat/long in Firestore
-                userDocRef.update({
-                    latitude: newLatitude,
-                    longitude: newLongitude
-                }).then(() => {
-                    console.log("Location updated successfully");
-                }).catch(error => {
-                    console.error("Error updating location:", error);
-                });
+                setUserData(userId,newLatitude,newLongitude );
+                
+               
             });
         }
 
@@ -184,6 +178,21 @@
             }
         });
     }
+
+  async function setUserData(userId,newLatitude,newLongitude ) {
+
+      try {
+          const docRef = await addDoc(collection(db, "users"), {
+              userId: userId,
+              latitude: newLatitude,
+              longitude: newLongitude
+          });
+          console.log("Location updated successfully  with ID: ", docRef.id);
+      } catch (e) {
+          console.error("Error adding Location: ", e);
+      }
+
+  }
 
 </script>
 
