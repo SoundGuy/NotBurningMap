@@ -36,7 +36,16 @@
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
 
+
+  const loginButton = document.getElementById("loginButton");
+  loginButton.style.display = "block"; // Display the button
+  loginButton.addEventListener("click", () => {
+      signInWithFacebook(); // Call your function to open the login popup
+  });
+  
   //signInWithFacebook();
+
+  
   function signInWithFacebook() {
 
       signInWithPopup(auth, provider)
