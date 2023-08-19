@@ -5,7 +5,7 @@
   import { getAuth } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
+  import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -95,6 +95,20 @@
           });
   }
 
+  async function getUserData(userId) {
+
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+          console.log(`${doc.id} => ${doc.data()}`);
+          if (doc.id == userId) {
+              console.log("Found User data for" + userId)
+              const userData = doc.data();
+              // Populate form with user's lat/long data
+              latitudeInput.value = userData.latitude || "";
+              longitudeInput.value = userData.longitude || "";
+          }
+      });
+  }
     function LoggedIn(user) {
 
         const greetingElement = document.getElementById("greeting");
@@ -114,8 +128,11 @@
 
             // Retrieve user's data from Firestore
             const userId = user.uid;
-            const userDocRef = db.collection("users").doc(userId);
 
+
+            getUserData(user.uid); 
+        /*    const userDocRef = db.collection("users").doc(userId);
+            
             userDocRef.get().then(doc => {
                 if (doc.exists) {
                     const userData = doc.data();
@@ -123,7 +140,7 @@
                     latitudeInput.value = userData.latitude || "";
                     longitudeInput.value = userData.longitude || "";
                 }
-            });
+            });*/
 
             // Handle form submission
             locationForm.addEventListener("submit", event => {
@@ -168,30 +185,6 @@
 </script>
 
 
-<!-- Add the Leaflet CSS and JavaScript links -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-
-<script>
-    // Initialize the map
-    const map = L.map('map').setView([0, 0], 2); // Set initial coordinates and zoom level
-
-    // Add a tile layer (you can choose different tile providers)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add markers for friends' locations
-    // You would need to fetch friends' locations from Firestore and iterate through them
-    // Example: Add a marker for a friend's location
-    
-    var latitude = 32.1415568;
-    var longitude = 34.8322442;
-    const friendLocation = [latitude, longitude]; // Replace with actual coordinates
-    L.marker(friendLocation).addTo(map).bindPopup("Your friend's name");
-</script>
-
 
 <div id="greeting">Hello . Please log in to continue</div>
 
@@ -212,5 +205,30 @@
 
 
 <!-- Create a map container -->
-<div id="map">Map goes here</div>
+map:
+<div id="map"></div>
 
+
+<!-- Add the Leaflet CSS and JavaScript links -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+<script>
+    // Initialize the map
+    const map = L.map('map').setView([0, 0], 2); // Set initial coordinates and zoom level
+
+    // Add a tile layer (you can choose different tile providers)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add markers for friends' locations
+    // You would need to fetch friends' locations from Firestore and iterate through them
+    // Example: Add a marker for a friend's location
+
+    var latitude = 32.1415568;
+    var longitude = 34.8322442;
+    const friendLocation = [latitude, longitude]; // Replace with actual coordinates
+    L.marker(friendLocation).addTo(map).bindPopup("Your friend's name");
+</script>
