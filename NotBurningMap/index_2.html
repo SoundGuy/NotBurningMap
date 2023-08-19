@@ -5,8 +5,9 @@
   import { getAuth } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-  
-  
+  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
+
+
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,11 +33,6 @@
   const auth = getAuth();
   
   
-  </script>
-
-<script src="https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore-compat.js"></script>
-
-<script>
   // Initialize Cloud Firestore and get a reference to the service
   const db = firebase.firestore();
 
