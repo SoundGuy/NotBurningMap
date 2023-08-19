@@ -5,6 +5,7 @@
   import { getAuth } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+  import { firestore } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
 
   
   // TODO: Add SDKs for Firebase products that you want to use
@@ -96,6 +97,7 @@
             // User is logged in
             console.log("User is logged in 2:", user.displayName);
             // You can show other content or features for logged-in users here
+            console.log("greetingElement" + greetingElement);
             greetingElement.textContent = "Hello " + user.displayName;
 
             loggedInContent.style.display = "block";
