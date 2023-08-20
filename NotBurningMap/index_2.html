@@ -5,7 +5,7 @@
   import { getAuth, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs, query, where  } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
+  import { getFirestore, collection, addDoc, getDocs, query, where , deleteDoc  } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -455,6 +455,11 @@
         
         setUserData(userId,newLatitude,newLongitude , playaNameInput.value, allowVisible);
     }
+
+  async function deleteUserData(docRef) {
+      console.log("Deleting " + docRef.id);
+      await deleteDoc(doc(db, "users", docRef.id));
+  }
   async function setUserData(userId,newLatitude,newLongitude ,playaName, allowVisible) {
 
 
@@ -462,16 +467,7 @@
       const q = query(collection(db, "users"), where("userId", "==", userId));
 
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((docRef) => {
-
-          docRef.delete()
-              .then(() => {
-                  console.log('Document successfully deleted.');
-              })
-              .catch((error) => {
-                  console.error('Error deleting document:', error);
-              });
-      });
+      querySnapshot.forEach((docRef) =>  deleteUserData(docRef) );
       
       
       // Add a marker for the user's location
