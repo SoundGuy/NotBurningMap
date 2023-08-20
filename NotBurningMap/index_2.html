@@ -36,6 +36,8 @@
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
 
+  
+  // globals
   var map;
   var currentUser;
   var currentUserFBID = "";
@@ -418,6 +420,15 @@
 
   SetupMap();
 
+
+  function statusChangeCallback(response) {
+      console.log("fb status change callback "  + response);
+      console.log("token "  + response.authResponse.accessToken);
+      fbaccessToken = response.authResponse.accessToken;
+      fbUserID = response.authResponse.userID;
+      console.log("fb user " + fbUserID + " token "  + fbaccessToken );
+  }
+  
 </script>
 
 <script>
@@ -447,13 +458,6 @@
         statusChangeCallback(response);
     });*/
 
-    function statusChangeCallback(response) {
-        console.log("fb status change callback "  + response);
-        console.log("token "  + response.authResponse.accessToken);
-        fbaccessToken = response.authResponse.accessToken;
-        fbUserID = response.authResponse.userID;
-        console.log("fb user " + fbUserID + " token "  + fbaccessToken );
-    }
 
     /*
     FB.login(
