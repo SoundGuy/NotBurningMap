@@ -101,6 +101,7 @@
 
       const latitudeInput = document.getElementById("latitude");
       const longitudeInput = document.getElementById("longitude");
+      const playaNameInput = document.getElementById("playaName");
 
       const q = query(collection(db, "users"), where("userId", "==", userId));
      
@@ -113,6 +114,7 @@
               // Populate form with user's lat/long data
               latitudeInput.value = userData.latitude || "";
               longitudeInput.value = userData.longitude || "";
+              playaNameInput.value = userData.playaName || "";
           //}
       });
   }
@@ -145,6 +147,7 @@
 
                 const latitudeInput = document.getElementById("latitude");
                 const longitudeInput = document.getElementById("longitude");
+                const playaNameInput = document.getElementById("playaName");
                 
                 event.preventDefault();
 
@@ -152,7 +155,7 @@
                 const newLatitude = latitudeInput.value;
                 const newLongitude = longitudeInput.value;
 
-                setUserData(userId,newLatitude,newLongitude );
+                setUserData(userId,newLatitude,newLongitude , playaNameInput.value);
                 
                
             });
@@ -178,13 +181,14 @@
         });
     }
 
-  async function setUserData(userId,newLatitude,newLongitude ) {
+  async function setUserData(userId,newLatitude,newLongitude ,playaName) {
 
       try {
           const docRef = await addDoc(collection(db, "users"), {
               userId: userId,
               latitude: newLatitude,
-              longitude: newLongitude
+              longitude: newLongitude,
+              playaName: playaName
           });
           console.log("Location updated successfully  with ID: ", docRef.id);
       } catch (e) {
@@ -204,6 +208,10 @@
 <div id="loggedInContent" style="display: none;">
     <!-- HTML Form for Lat/Long -->
     <form id="locationForm">
+
+        <label for="playaName">Playa Name:</label>
+        <input type="text" id="playaName" name="playaName" required><br>
+
         <label for="latitude">Latitude:</label>
         <input type="text" id="latitude" name="latitude" required><br>
 
