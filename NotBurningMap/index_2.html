@@ -45,6 +45,47 @@
   
   //signInWithFacebook();
 
+  const centerButton = document.getElementById("centerButton");
+  if ("geolocation" in navigator) {
+      
+      // Center Button Event Listener
+      centerButton.addEventListener("click", () => {
+          if (map) {
+              // Center the map on the user's location
+              navigator.geolocation.getCurrentPosition(position => {
+                  const { latitude, longitude } = position.coords;
+                  // Initialize the map centered on user's location
+                  const map = L.map(mapContainer).setView([latitude, longitude], 13);
+
+
+                  // Add a marker for the user's location
+                  L.marker([latitude, longitude]).addTo(map)
+                      .bindPopup('Your Location')
+                      .openPopup();
+                  
+              }, error => {
+                  console.error("Error getting user's location:", error);
+              });
+          }
+      });
+  } else {
+      console.error("Geolocation not supported by the browser");
+  }
+
+  const centerButton = document.getElementById("centerButton");
+  // Center Button Event Listener
+  centerButton.addEventListener("click", CenterLocatoin);
+  function CenterLocatoin(){
+      if (map) {
+          // Center the map on the user's location
+          navigator.geolocation.getCurrentPosition(position => {
+              const { latitude, longitude } = position.coords;
+              map.setView([latitude, longitude], 13);
+          }, error => {
+              console.error("Error getting user's location:", error);
+          });
+      }
+  }
   
   function signInWithFacebook() {
 
@@ -222,6 +263,9 @@
     </form>
 </div>
 
+<!-- Center Button -->
+<button id="centerButton">Center on My Location</button>
+
 
 <!-- Create a map container -->
 map:
@@ -249,7 +293,7 @@ map:
     
     // Initialize the map
     //const map = L.map('map').setView([0, 0], 2); // Set initial coordinates and zoom level
-    const map = L.map('mapContainer').setView([32, 34], 13); // Set initial coordinates and zoom level
+    const map = L.map('mapContainer').setView([32.1415568,34.8322442], 13); // Set initial coordinates and zoom level
 
     // Add a tile layer (you can choose different tile providers)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -260,6 +304,7 @@ map:
     // You would need to fetch friends' locations from Firestore and iterate through them
     // Example: Add a marker for a friend's location
 
+    // BM is : 40.7859569,-119.2264743
     var latitude = 32.1415568;
     var longitude = 34.8322442;
     const friendLocation = [latitude, longitude]; // Replace with actual coordinates
