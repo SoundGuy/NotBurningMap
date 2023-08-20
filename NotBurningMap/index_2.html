@@ -142,6 +142,10 @@
 
             // Handle form submission
             locationForm.addEventListener("submit", event => {
+
+                const latitudeInput = document.getElementById("latitude");
+                const longitudeInput = document.getElementById("longitude");
+                
                 event.preventDefault();
 
                 // Get new lat/long values from form
