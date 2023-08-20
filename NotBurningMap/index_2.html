@@ -57,7 +57,8 @@
       console.error("Geolocation not supported by the browser");
   }
 
-  CenterLocatoin();
+  LoadMyLocatoin();
+  
     
   const getFriendsButton = document.getElementById("getFriendsButton");
   getFriendsButton.addEventListener("click", getFriendsList);
@@ -105,7 +106,7 @@
       
   }
   
-  function CenterLocatoin(){
+  function LoadMyLocatoin() {
 
       // Center the map on the user's location
       navigator.geolocation.getCurrentPosition(position => {
@@ -123,7 +124,38 @@
 
 
           });
-          
+
+          const latitudeInput = document.getElementById("latitude");
+          const longitudeInput = document.getElementById("longitude");
+
+          latitudeInput.value = latitude;
+          longitudeInput.value = longitude;
+
+          // Initialize the map centered on user's location
+          //map.setView([latitude, longitude], 13);
+
+
+          // Add a marker for the user's location
+          L.marker([latitude, longitude]).addTo(map)
+              .bindPopup('Your Location');
+
+
+
+
+      }, error => {
+          console.error("Error getting user's location:", error);
+      });
+  }
+  
+  
+  // TODO Code dupre with load my location. reuse that one.
+  function CenterLocatoin(){
+
+      // Center the map on the user's location
+      navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+
+                    
           const latitudeInput = document.getElementById("latitude");
           const longitudeInput = document.getElementById("longitude");
           
