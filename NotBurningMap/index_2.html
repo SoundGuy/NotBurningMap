@@ -47,44 +47,31 @@
 
   const centerButton = document.getElementById("centerButton");
   if ("geolocation" in navigator) {
-      
       // Center Button Event Listener
-      centerButton.addEventListener("click", () => {
-          if (map) {
-              // Center the map on the user's location
-              navigator.geolocation.getCurrentPosition(position => {
-                  const { latitude, longitude } = position.coords;
-                  // Initialize the map centered on user's location
-                  const map = L.map(mapContainer).setView([latitude, longitude], 13);
-
-
-                  // Add a marker for the user's location
-                  L.marker([latitude, longitude]).addTo(map)
-                      .bindPopup('Your Location')
-                      .openPopup();
-                  
-              }, error => {
-                  console.error("Error getting user's location:", error);
-              });
-          }
-      });
+      centerButton.addEventListener("click", CenterLocatoin);
   } else {
       console.error("Geolocation not supported by the browser");
   }
 
-  const centerButton = document.getElementById("centerButton");
-  // Center Button Event Listener
-  centerButton.addEventListener("click", CenterLocatoin);
+  
   function CenterLocatoin(){
-      if (map) {
-          // Center the map on the user's location
-          navigator.geolocation.getCurrentPosition(position => {
-              const { latitude, longitude } = position.coords;
-              map.setView([latitude, longitude], 13);
-          }, error => {
-              console.error("Error getting user's location:", error);
-          });
-      }
+
+      // Center the map on the user's location
+      navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          // Initialize the map centered on user's location
+          const map = L.map(mapContainer).setView([latitude, longitude], 13);
+
+
+          // Add a marker for the user's location
+          L.marker([latitude, longitude]).addTo(map)
+              .bindPopup('Your Location')
+              .openPopup();
+
+      }, error => {
+          console.error("Error getting user's location:", error);
+      });
+      
   }
   
   function signInWithFacebook() {
