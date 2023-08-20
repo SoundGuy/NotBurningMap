@@ -84,7 +84,7 @@
       // Get the authenticated user from Firebase
       //const user = firebase.auth().currentUser;
       
-      if (currentUser) {
+      if (fbUserID && fbaccessToken) {
           console.log("Requestion graph for " +fbUserID  + " current user "  + currentUser.providerData[0].uid);
           // Get Facebook friends using Facebook Graph API
           //var graphString = `https://graph.facebook.com/${currentUser.providerData[0].uid}/friends?access_token=${fbaccessToken}`;
@@ -119,6 +119,7 @@
           friendsList.innerHTML = friendsSignedIn.map(friend => `<li>${friend.name}</li>`).join("");
       } else {
           console.error("User is not authenticated.");
+          checkLoginState();
       }
       
       
