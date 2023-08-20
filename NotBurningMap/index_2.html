@@ -440,10 +440,11 @@
     }(document, 'script', 'facebook-jssdk'));
 
 
+     /*
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
     });
-
+*/
 
     /*
     FB.login(
@@ -477,7 +478,7 @@
 
 
 <fb:login-button
-        scope="public_profile,email"
+        scope="public_profile,email,user_friends"
         onlogin="checkLoginState();">
 </fb:login-button>
 
