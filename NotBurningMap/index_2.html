@@ -77,7 +77,7 @@
       //const user = firebase.auth().currentUser;
       
       if (currentUser) {
-          console.log("Requestion graph for " +fbUserID  );
+          console.log("Requestion graph for " +fbUserID  + " current user "  + currentUser.providerData[0].uid);
           // Get Facebook friends using Facebook Graph API
           //var graphString = `https://graph.facebook.com/${currentUser.providerData[0].uid}/friends?access_token=${fbaccessToken}`;
           var graphString = `https://graph.facebook.com/${fbUserID}/friends?access_token=${fbaccessToken}`;
