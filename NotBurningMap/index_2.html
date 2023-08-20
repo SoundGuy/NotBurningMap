@@ -205,7 +205,7 @@
 
           
           const userData = doc.data();
-          console.log("Found User data for userData.playaName  " + userData.userId + " / " +  userData.fbUID);
+          console.log("Found User data for " + userData.playaName  + " " + userData.userId + " / " +  userData.fbUID);
                    
           // Add a marker for the user's location
           L.marker([ userData.latitude, userData.longitude ]).addTo(map)
