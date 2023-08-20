@@ -88,8 +88,9 @@
       querySnapshot.forEach((doc) => {
           console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
 
-          console.log("Found User data for" + userId)
+          
           const userData = doc.data();
+          console.log("Found User data for" + userData.userId + " = " + userData);
           // Populate form with user's lat/long data
           latitudeInput.value = userData.latitude || "";
           longitudeInput.value = userData.longitude || "";
