@@ -99,7 +99,8 @@
 
   async function getUserData(userId) {
 
-
+      const latitudeInput = document.getElementById("latitude");
+      const longitudeInput = document.getElementById("longitude");
 
       const q = query(collection(db, "users"), where("userId", "==", userId));
      
@@ -120,8 +121,7 @@
         const greetingElement = document.getElementById("greeting");
         const loggedInContent = document.getElementById("loggedInContent");
         const locationForm = document.getElementById("locationForm");
-        const latitudeInput = document.getElementById("latitude");
-        const longitudeInput = document.getElementById("longitude");
+        
         
         if (user) {
             // User is logged in
@@ -138,16 +138,7 @@
 
             console.log("Getting user data for   " + userId);
             getUserData(userId); 
-        /*    const userDocRef = db.collection("users").doc(userId);
-            
-            userDocRef.get().then(doc => {
-                if (doc.exists) {
-                    const userData = doc.data();
-                    // Populate form with user's lat/long data
-                    latitudeInput.value = userData.latitude || "";
-                    longitudeInput.value = userData.longitude || "";
-                }
-            });*/
+       
 
             // Handle form submission
             locationForm.addEventListener("submit", event => {
