@@ -85,7 +85,7 @@
       //const user = firebase.auth().currentUser;
       
       if (fbUserID && fbaccessToken) {
-          console.log("Requestion graph for " +fbUserID  + " current user "  + currentUser.providerData[0].uid);
+          //console.log("Requestion graph for " +fbUserID  + " current user "  + currentUser.providerData[0].uid);
           // Get Facebook friends using Facebook Graph API
           //var graphString = `https://graph.facebook.com/${currentUser.providerData[0].uid}/friends?access_token=${fbaccessToken}`;
           var graphString = `https://graph.facebook.com/${fbUserID}/friends?access_token=${fbaccessToken}`;
@@ -372,13 +372,23 @@
         const longitudeInput = document.getElementById("longitude");
         const playaNameInput = document.getElementById("playaName");
 
+        const allowVisibleCheckbox = document.getElementById("allowVisible");
+        const useApproximateCheckbox = document.getElementById("useApproximate");
+
+
+        const allowVisible = allowVisibleCheckbox.checked;
+        const useApproximate = useApproximateCheckbox.checked;
+
+        
         // Get new lat/long values from form
         const newLatitude = latitudeInput.value;
         const newLongitude = longitudeInput.value;
 
-        setUserData(userId,newLatitude,newLongitude , playaNameInput.value);
+        
+        
+        setUserData(userId,newLatitude,newLongitude , playaNameInput.value, allowVisible);
     }
-  async function setUserData(userId,newLatitude,newLongitude ,playaName) {
+  async function setUserData(userId,newLatitude,newLongitude ,playaName, allowVisible) {
 
 
       // Add a marker for the user's location
@@ -392,7 +402,8 @@
               latitude: newLatitude,
               longitude: newLongitude,
               playaName: playaName,
-              fbUID: currentUserFBID
+              fbUID: currentUserFBID,
+              allowVisible: allowVisible
           });
           console.log("Location updated successfully  with ID: ", docRef.id);
       } catch (e) {
@@ -401,6 +412,26 @@
 
   }
 
+
+  function getModifiedLocation(latitude, longitude, useApproximate) {
+      if (useApproximate) {
+          // Offset for 1 km in degrees
+          const offset = 0.009;
+
+          // Calculate new latitude and longitude
+          const newLatitude = latitude + offset;
+          const newLongitude = longitude + offset;
+
+          // Truncate to a specific number of decimal places
+          const decimalPlaces = 6; // Choose the number of decimal places you need
+          const truncatedLatitude = parseFloat(newLatitude.toFixed(decimalPlaces));
+          const truncatedLongitude = parseFloat(newLongitude.toFixed(decimalPlaces));
+
+          return { latitude: truncatedLatitude, longitude: truncatedLongitude };
+      } else {
+          return { latitude, longitude };
+      }
+  }
   function SetupMap() {
       //const mapContainer = document.getElementById("mapContainer");
 
@@ -503,7 +534,7 @@
 <div id="greeting2">Add yourself to the map by hitting "Center on your locatoin" and the filling in your playa name and hit save </div>
 
 
-<div id="greeting3">Facebook login is currently not working properly and you might need to click all 3 login options</div>
+<div id="greeting3">Facebook login might not working properly  right now, click login with faebook and if you still see another login button also click that afterwards</div>
 
 
 <button id="loginButton">Log In with Facebook</button>
@@ -531,6 +562,18 @@
         <label for="longitude">Longitude:</label>
         <input type="text" id="longitude" name="longitude" required><br>
 
+        <!-- Checkbox 1: Allow Others to See My Location -->
+        <label>
+            <input type="checkbox" id="allowVisible" name="allowVisible" >
+            On - Allow Everyone to See My Location (off - just your friends)
+        </label><br><br>
+
+        <!-- Checkbox 2: Use Approximate Location -->
+        <label>
+            <input type="checkbox" id="useApproximate" name="useApproximate" checked>
+            Use Approximate Location (for privacy reasons)
+        </label><br><br>
+        
         <button type="submit">Save</button>
     </form>
 </div>
