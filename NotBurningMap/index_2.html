@@ -440,11 +440,14 @@
     }(document, 'script', 'facebook-jssdk'));
 
 
-     
+     /*
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
-    });
+    });*/
 
+    function statusChangeCallback(response) {
+        console.log("fb status change callback "  + response);
+    }
 
     /*
     FB.login(
