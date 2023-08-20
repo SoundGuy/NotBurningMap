@@ -373,7 +373,8 @@
               userId: userId,
               latitude: newLatitude,
               longitude: newLongitude,
-              playaName: playaName
+              playaName: playaName,
+              fbUID: currentUser.providerData[0].uid
           });
           console.log("Location updated successfully  with ID: ", docRef.id);
       } catch (e) {
