@@ -67,7 +67,10 @@
 
   const centerPlayaButton = document.getElementById("centerPlayaButton");
   centerPlayaButton.addEventListener("click", CenterOnPlaya);
-  
+
+
+  const fbloginButton = document.getElementById("fbloginButton");
+  fbloginButton.addEventListener("click", checkLoginState);
     
   const getFriendsButton = document.getElementById("getFriendsButton");
   getFriendsButton.addEventListener("click", getFriendsList);
@@ -429,9 +432,7 @@
       console.log("fb user " + fbUserID + " token "  + fbaccessToken );
   }
   
-</script>
-
-<script>
+  
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '14255915206',
@@ -491,6 +492,7 @@
 
 
 <fb:login-button
+        id="fbloginButton"
         scope="public_profile,email,user_friends"
         onlogin="checkLoginState();">
 </fb:login-button>
