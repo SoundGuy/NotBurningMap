@@ -58,6 +58,10 @@
   }
 
   LoadMyLocatoin();
+
+
+  const centerPlayaButton = document.getElementById("centerPlayaButton");
+  centerPlayaButton.addEventListener("click", CenterOnPlaya);
   
     
   const getFriendsButton = document.getElementById("getFriendsButton");
@@ -178,6 +182,11 @@
           console.error("Error getting user's location:", error);
       });
       
+  }
+
+  function CenterOnPlaya() {
+      // Initialize the map centered on user's location
+      setView([40.7859569, -119.2264743], 15);
   }
 
   const loadEveryone = document.getElementById("loadEveryone");
@@ -435,6 +444,7 @@
 
 <!-- Center Button -->
 <button id="centerButton">Center on My Location</button>
+<button id="centerPlayaButton">Center on Playa</button>
 <button id="loadEveryone">Load Everyone's Locations</button>
 
 
