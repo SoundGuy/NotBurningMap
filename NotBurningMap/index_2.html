@@ -37,6 +37,9 @@
   const db = getFirestore(app);
 
   var map;
+  var currentUser;
+  var  credential;
+  var accessToken;
 
   const loginButton = document.getElementById("loginButton");
   loginButton.style.display = "block"; // Display the button
@@ -54,7 +57,52 @@
       console.error("Geolocation not supported by the browser");
   }
 
-  
+
+  const getFriendsButton = document.getElementById("getFriendsButton");
+  getFriendsButton.addEventListener("click", getFriendsList);
+
+  async function getFriendsList(){
+      const friendsList = document.getElementById("friendsList");
+
+      // Get the authenticated user from Firebase
+      //const user = firebase.auth().currentUser;
+      
+      if (currentUser) {
+          // Get Facebook friends using Facebook Graph API
+          var graphString = `https://graph.facebook.com/${currentUser.uid}/friends?access_token=${currentUser.accessToken}`;
+          console.log("Calling " + graphString)
+          const response = await fetch(graphString);
+          const data = await response.json();
+
+          console.log("result  " + data + data.data);
+          const friends = data.data;
+
+          // Iterate through friends and check their authentication status
+          const friendsSignedIn = [];
+          for (const friend of friends) {
+              try {
+                  // Check if friend is signed in to your Firebase app
+                  //const provider = new firebase.auth.FacebookAuthProvider();
+                  //provider.addScope('email'); // Add necessary scopes
+
+                  //const credential = firebase.auth.FacebookAuthProvider.credential(friend.id, user.accessToken);
+                  //await firebase.auth().signInWithCredential(credential);
+
+                  // Friend is signed in
+                  friendsSignedIn.push(friend);
+              } catch (error) {
+                  // Friend is not signed in
+              }
+          }
+
+          // Display the list of signed-in friends
+          friendsList.innerHTML = friendsSignedIn.map(friend => `<li>${friend.name}</li>`).join("");
+      } else {
+          console.error("User is not authenticated.");
+      }
+      
+      
+  }
   
   function CenterLocatoin(){
 
@@ -116,9 +164,11 @@
               // The signed-in user info.
               const user = result.user;
 
+              currentUser = user;
+              
               // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-              const credential = FacebookAuthProvider.credentialFromResult(result);
-              const accessToken = credential.accessToken;
+              credential = FacebookAuthProvider.credentialFromResult(result);
+              accessToken = credential.accessToken;
 
               // IdP data available using getAdditionalUserInfo(result)
               // ...
@@ -329,6 +379,9 @@
 <button id="centerButton">Center on My Location</button>
 <button id="loadEveryone">Load Everyone's Locations</button>
 
+<button id="getFriendsButton">Get Facebook Friends Location</button>
+
+
 
 <!-- Create a map container -->
 map:
@@ -339,6 +392,9 @@ map:
         height: 500px;
     }
 </style>
+
+
+<ul id="friendsList"></ul>
 
 
 <!-- Add the Leaflet CSS and JavaScript links -->
