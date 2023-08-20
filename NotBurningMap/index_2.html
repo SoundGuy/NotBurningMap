@@ -111,6 +111,18 @@
           const { latitude, longitude } = position.coords;
 
 
+          const loggedInContent = document.getElementById("loggedInContent");
+          loggedInContent.style.display = "block";
+
+          const locationForm = document.getElementById("locationForm");
+          locationForm.addEventListener("submit", event => {
+
+              event.preventDefault();
+              submitData("");
+
+
+          });
+          
           const latitudeInput = document.getElementById("latitude");
           const longitudeInput = document.getElementById("longitude");
           
@@ -125,6 +137,9 @@
           L.marker([latitude, longitude]).addTo(map)
               .bindPopup('Your Location')
               .openPopup();
+          
+          
+          
 
       }, error => {
           console.error("Error getting user's location:", error);
@@ -263,18 +278,9 @@
 
             // Handle form submission
             locationForm.addEventListener("submit", event => {
-
-                const latitudeInput = document.getElementById("latitude");
-                const longitudeInput = document.getElementById("longitude");
-                const playaNameInput = document.getElementById("playaName");
                 
                 event.preventDefault();
-
-                // Get new lat/long values from form
-                const newLatitude = latitudeInput.value;
-                const newLongitude = longitudeInput.value;
-
-                setUserData(userId,newLatitude,newLongitude , playaNameInput.value);
+                submitData(userId);
                 
                
             });
@@ -300,6 +306,18 @@
         });
     }
 
+    async function submitData(userId) {
+
+        const latitudeInput = document.getElementById("latitude");
+        const longitudeInput = document.getElementById("longitude");
+        const playaNameInput = document.getElementById("playaName");
+
+        // Get new lat/long values from form
+        const newLatitude = latitudeInput.value;
+        const newLongitude = longitudeInput.value;
+
+        setUserData(userId,newLatitude,newLongitude , playaNameInput.value);
+    }
   async function setUserData(userId,newLatitude,newLongitude ,playaName) {
 
 
