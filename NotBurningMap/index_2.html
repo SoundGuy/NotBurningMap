@@ -413,8 +413,56 @@
 
 
   SetupMap();
+
+  
 </script>
 
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '14255915206',
+            cookie     : true,
+            xfbml      : true,
+            version    : '0af15a8dc7e4081d663aac3928341dc4'
+        });
+
+        FB.AppEvents.logPageView();
+
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
+
+    /*
+    FB.login(
+        function(response) {
+            console.log(response);
+        },
+        {
+            scope: 'user_friends',
+            auth_type: 'rerequest'
+        }
+    );*/
+    
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    }
+
+</script>
 
 
  
@@ -426,6 +474,12 @@
 
 
 <button id="loginButton">Log In with Facebook</button>
+
+
+<fb:login-button
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+</fb:login-button>
 
 
 <div id="loggedInContent" style="display: none;">
