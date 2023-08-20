@@ -69,8 +69,8 @@
   centerPlayaButton.addEventListener("click", CenterOnPlaya);
 
 
- // const fbloginButton = document.getElementById("fbloginButton");
- // fbloginButton.addEventListener("click", checkLoginState);
+  const fbloginButton = document.getElementById("fbloginButton");
+  fbloginButton.addEventListener("click", checkLoginState);
   const fbloginButton2 = document.getElementById("loginButton2");
   fbloginButton2.addEventListener("click", checkLoginState);
   //fbloginButton2.style.display = "none";
@@ -534,20 +534,20 @@
 <div id="greeting2">Add yourself to the map by hitting "Center on your locatoin" and the filling in your playa name and hit save </div>
 
 
-<div id="greeting3">Facebook login might not working properly  right now, click login with faebook and if you still see another login button also click that afterwards</div>
+<div id="greeting3">Facebook login might not working properly  right now, click login with faebook and if you still see another login buttons also click them afterwards</div>
 
 
 <button id="loginButton">Log In with Facebook</button>
 <button id="loginButton2">Log In with Facebook2</button>
 
-<!--
+
 <fb:login-button
         id="fbloginButton"
         scope="public_profile,email,user_friends"
         onlogin="checkLoginState();">
 </fb:login-button>
 
--->
+
 
 <div id="loggedInContent" style="display: none;">
     <!-- HTML Form for Lat/Long -->
