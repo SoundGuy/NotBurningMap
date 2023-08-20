@@ -330,7 +330,7 @@
       querySnapshot.forEach((doc) => {
           console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
 
-          console.log("Found User data for" + userId)
+          console.log("Found location  data for fb user " + fbUser.name + " " + fbUser.id )
           const userData = doc.data();
           // Populate form with user's lat/long data
          // latitudeInput.value = userData.latitude || "";
