@@ -200,11 +200,11 @@
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-          console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
+          //console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
 
           
           const userData = doc.data();
-          console.log("Found User data for" + userData.userId + " = " + userData.playaName + " " + userData);
+          console.log("Found User data for userData.playaName  " + userData.userId + " / " +  userData.fbUID);
                    
           // Add a marker for the user's location
           L.marker([ userData.latitude, userData.longitude ]).addTo(map)
