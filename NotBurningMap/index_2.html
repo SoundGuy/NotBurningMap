@@ -116,7 +116,9 @@
           }
 
           // Display the list of signed-in friends
-          friendsList.innerHTML = friendsSignedIn.map(friend => `<li>${friend.name}</li>`).join("");
+          friendsList.innerHTML = friendsSignedIn.map(friend => `<li>${friend.name}` + getFBUserData(friend)+  `</li>` ).join("");
+          
+          
       } else {
           console.error("User is not authenticated.");
           checkLoginState();
@@ -311,6 +313,58 @@
               .openPopup();
      
       });
+  }
+
+  async function getFBUserData(fbUser) {
+
+      /*
+      const latitudeInput = document.getElementById("latitude");
+      const longitudeInput = document.getElementById("longitude");
+      const playaNameInput = document.getElementById("playaName");
+        */
+      
+      const q = query(collection(db, "users"), where("fbUID", "==", fbUser.id));
+
+      const querySnapshot = await getDocs(q);
+      var output;
+      querySnapshot.forEach((doc) => {
+          console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
+
+          console.log("Found User data for" + userId)
+          const userData = doc.data();
+          // Populate form with user's lat/long data
+         // latitudeInput.value = userData.latitude || "";
+          //longitudeInput.value = userData.longitude || "";
+          //playaNameInput.value = userData.playaName || "";
+          
+          var LocationName ;
+
+          const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${userData.latitude}&lon=${userData.longitude}`;
+
+          fetch(apiUrl)
+              .then(response => response.json())
+              .then(data => {
+                  if (data.display_name) {
+                      LocationName = data.display_name;
+                      console.log("Nearest city:", nearestCity);
+                  } else {
+                      console.log("City name not found in API response");
+                  }
+              })
+              .catch(error => {
+                  console.error("Error fetching data from Nominatim API:", error);
+              });
+          
+          output = "(" + userData.playaName + ") " + LocationName; 
+
+          // Add a marker for the user's location
+          L.marker([ userData.latitude, userData.longitude ]).addTo(map)
+              .bindPopup(userData.playaName)
+              .openPopup();
+
+      });
+      
+      return output;
   }
     function LoggedIn(user) {
 
