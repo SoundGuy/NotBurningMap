@@ -351,20 +351,23 @@
                       LocationName = data.display_name;
                       console.log("Nearest city:", LocationName);
                       output = fbUser.name + " (" + userData.playaName + ") " + LocationName;
+                      friendsList.innerHTML += "<li>" + output + "</li>";
                   } else {
                       console.log("City name not found in API response");
                       output = fbUser.name + " (" + userData.playaName + ") " ;
+                      friendsList.innerHTML += "<li>" + output + "</li>";
                   }
               })
               .catch(error => {
                   console.error("Error fetching data from Nominatim API:", error);
 
-                  output = fbUser.name + " (" + userData.playaName + ") - Error fetching data"; 
+                  output = fbUser.name + " (" + userData.playaName + ") - Error fetching data";
+                  friendsList.innerHTML += "<li>" + output + "</li>";
               });
           
           
 
-          friendsList.innerHTML += "<li>" + output + "</li>";
+          
           // Add a marker for the user's location
           L.marker([ userData.latitude, userData.longitude ]).addTo(map)
               .bindPopup(userData.playaName)
