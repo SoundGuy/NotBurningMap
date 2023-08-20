@@ -41,6 +41,8 @@
   var currentUserFBID = "";
   var  credential;
   var accessToken;
+  var fbaccessToken;
+  var fbUserID;
 
   const loginButton = document.getElementById("loginButton");
   loginButton.style.display = "block"; // Display the button
@@ -74,9 +76,10 @@
       // Get the authenticated user from Firebase
       //const user = firebase.auth().currentUser;
       
-      if (currentUser) {
+      if (fbUserID) {
           // Get Facebook friends using Facebook Graph API
-          var graphString = `https://graph.facebook.com/${currentUser.providerData[0].uid}/friends?access_token=${currentUser.accessToken}`;
+          //var graphString = `https://graph.facebook.com/${currentUser.providerData[0].uid}/friends?access_token=${fbaccessToken}`;
+          var graphString = `https://graph.facebook.com/${fbUserID}/friends?access_token=${fbaccessToken}`;
           console.log("Calling " + graphString)
           const response = await fetch(graphString);
           const data = await response.json();
@@ -446,6 +449,8 @@
     function statusChangeCallback(response) {
         console.log("fb status change callback "  + response);
         console.log("token "  + response.authResponse.accessToken);
+        fbaccessToken = response.authResponse.accessToken;
+        fbUserID = response.authResponse.userID;
     }
 
     /*
