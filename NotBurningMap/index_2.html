@@ -340,7 +340,8 @@
           var LocationName ;
 
           const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${userData.latitude}&lon=${userData.longitude}`;
-
+        
+          console.log("calling " + apiUrl);
           fetch(apiUrl)
               .then(response => response.json())
               .then(data => {
