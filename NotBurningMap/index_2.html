@@ -57,7 +57,8 @@
       console.error("Geolocation not supported by the browser");
   }
 
-
+  CenterLocatoin();
+    
   const getFriendsButton = document.getElementById("getFriendsButton");
   getFriendsButton.addEventListener("click", getFriendsList);
 
@@ -372,9 +373,11 @@
 
 
 
+<!-- 
 <div id="greeting">Hello . Please log in to continue</div>
 
 <button id="loginButton">Log In with Facebook</button>
+-->
 
 <div id="loggedInContent" style="display: none;">
     <!-- HTML Form for Lat/Long -->
@@ -397,8 +400,9 @@
 <button id="centerButton">Center on My Location</button>
 <button id="loadEveryone">Load Everyone's Locations</button>
 
+<!--
 <button id="getFriendsButton">Get Facebook Friends Location</button>
-
+-->
 
 
 <!-- Create a map container -->
