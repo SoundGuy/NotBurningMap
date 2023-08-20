@@ -5,7 +5,7 @@
   import { getAuth, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
+  import { getFirestore, collection, addDoc, getDocs, query, where  } from 'https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js'
 
 
   // TODO: Add SDKs for Firebase products that you want to use
@@ -99,16 +99,20 @@
 
   async function getUserData(userId) {
 
-      const querySnapshot = await getDocs(collection(db, "users"));
+
+
+      const q = query(collection(db, "users"), where("userId", "==", userId));
+     
+      const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-          if (doc.id == userId) {
+          console.log(`doc.id = ${doc.id} => doc.data = ${doc.data()}`);
+          //if (doc.id == userId) {
               console.log("Found User data for" + userId)
               const userData = doc.data();
               // Populate form with user's lat/long data
               latitudeInput.value = userData.latitude || "";
               longitudeInput.value = userData.longitude || "";
-          }
+          //}
       });
   }
     function LoggedIn(user) {
