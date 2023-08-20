@@ -69,7 +69,7 @@
       
       if (currentUser) {
           // Get Facebook friends using Facebook Graph API
-          var graphString = `https://graph.facebook.com/${currentUser.uid}/friends?access_token=${currentUser.accessToken}`;
+          var graphString = `https://graph.facebook.com/${{currentUser.providerData[0].uid}}/friends?access_token=${currentUser.accessToken}`;
           console.log("Calling " + graphString)
           const response = await fetch(graphString);
           const data = await response.json();
