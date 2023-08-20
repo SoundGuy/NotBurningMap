@@ -73,6 +73,7 @@
  // fbloginButton.addEventListener("click", checkLoginState);
   const fbloginButton2 = document.getElementById("loginButton2");
   fbloginButton2.addEventListener("click", checkLoginState);
+  fbloginButton2.style.display = "none";
     
   const getFriendsButton = document.getElementById("getFriendsButton");
   getFriendsButton.addEventListener("click", getFriendsList);
@@ -99,6 +100,7 @@
           const friendsSignedIn = [];
           for (const friend of friends) {
               try {
+                  console.log("Found a friend " + friend.name);
                   // Check if friend is signed in to your Firebase app
                   //const provider = new firebase.auth.FacebookAuthProvider();
                   //provider.addScope('email'); // Add necessary scopes
