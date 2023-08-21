@@ -351,8 +351,9 @@
           fetch(apiUrl)
               .then(response => response.json())
               .then(data => {
-                  if (data.display_name) {
-                      LocationName = data.display_name;
+                  if (data.display_name && data.address.town && data.address.state && data.address.country  ) {
+                      //LocationName = data.display_name;
+                      LocationName = data.address.town + ","  + data.address.state + ","  +  data.address.country  ;
                       console.log("Nearest city:", LocationName);
                       output = fbUser.name + " (" + userData.playaName + ") " + LocationName;
                       friendsList.innerHTML += "<li>" + output + "</li>";
