@@ -528,8 +528,8 @@
           const offset = 0.009;
 
           // Calculate new latitude and longitude
-          const newLatitude = latitude + offset;
-          const newLongitude = longitude + offset;
+          const newLatitude = Number(latitude) + offset;
+          const newLongitude = Number(longitude) + offset;
 
           // Truncate to a specific number of decimal places
           const decimalPlaces = 6; // Choose the number of decimal places you need
