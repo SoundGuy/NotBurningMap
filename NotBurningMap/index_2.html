@@ -75,7 +75,7 @@
   
   const fbloginButton2 = document.getElementById("loginButton2");
   fbloginButton2.addEventListener("click", checkLoginState);
-  //fbloginButton2.style.display = "none";
+  fbloginButton2.style.display = "none";
     
   const getFriendsButton = document.getElementById("getFriendsButton");
   getFriendsButton.addEventListener("click", getFriendsList);
@@ -238,6 +238,7 @@
 
   function signInWithFacebook() {
 
+      fbloginButton2.style.display = "block";
       signInWithPopup(auth, provider)
           .then((result) => {
               // The signed-in user info.
@@ -624,6 +625,7 @@
 <div id="greeting3">You can consent to share your approximate or exact location with friends or with everyone</div>
 <br>
 <div id="greeting4">If facebook login might is not working properly, you might  still see another login buttons so also click it afterwards</div>
+<div id="greeting5">Your facebook friend's location display is currently pending Facebook's review and approval. Check again soon.</div>
 
 
 <button id="loginButton">Log In with Facebook</button>
@@ -654,7 +656,7 @@
         <!-- Checkbox 1: Allow Others to See My Location -->
         <label>
             <input type="checkbox" id="allowVisible" name="allowVisible" >
-            On - Allow Everyone to See My Location (off - just your friends)
+            Allow Everyone to See My Location (Leave unchecked - just your friends)
         </label><br><br>
 
         <!-- Checkbox 2: Use Approximate Location -->
