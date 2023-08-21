@@ -458,14 +458,14 @@
 
         
         
-        setUserData(userId,newLatitude,newLongitude , playaNameInput.value, allowVisible);
+        setUserData(userId,newLatitude,newLongitude , playaNameInput.value, allowVisible,useApproximate);
     }
 
   async function deleteUserData(docRef) {
       console.log("Deleting " + docRef.id);
       await deleteDoc(doc(db, "users", docRef.id));
   }
-  async function setUserData(userId,newLatitude,newLongitude ,playaName, allowVisible) {
+  async function setUserData(userId,newLatitude,newLongitude ,playaName, allowVisible,useApproximate) {
 
 
       // delete old references
@@ -480,11 +480,13 @@
           .bindPopup(playaName)
           .openPopup();
       
+      const modifiedLocatoin = getModifiedLocation(newLatitude,newLongitude,useApproximate);
+      
       try {
           const docRef = await addDoc(collection(db, "users"), {
               userId: userId,
-              latitude: newLatitude,
-              longitude: newLongitude,
+              latitude: modifiedLocatoin.latitude,
+              longitude: modifiedLocatoin.longitude,
               playaName: playaName,
               fbUID: currentUserFBID,
               allowVisible: allowVisible
