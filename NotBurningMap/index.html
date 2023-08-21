@@ -1,3 +1,21 @@
+<!doctype html><html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <meta http-equiv="Content-Type" content="Text/HTML" />
+    <meta charset="UTF-8" />
+    <title>NOT BURNING MAP. A printable map of your pals not on the playa.</title>
+    <meta name="keywords"
+          content="Burner Map, Burning Man, Black Rock City, map,
+            facebook, playa, 2023, " />
+    <meta name="description"
+          content="Tracking down friends not at Black Rock City
+            used to be harder than cleaning playa dust out of
+            gold-sequined booty shorts. Now you can share your
+            location, ask your friends to do the same, then
+            don't go to playa." />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="image_src" href="images/logo2.png">
+
+
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp ,  } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
@@ -510,8 +528,8 @@
           const offset = 0.009;
 
           // Calculate new latitude and longitude
-          const newLatitude = latitude + offset;
-          const newLongitude = longitude + offset;
+          const newLatitude = Number(latitude) + offset;
+          const newLongitude = Number(longitude) + offset;
 
           // Truncate to a specific number of decimal places
           const decimalPlaces = 6; // Choose the number of decimal places you need
@@ -623,96 +641,191 @@
 
 </script>
 
-<link rel="stylesheet" href="styles.css">
- 
-<div id="greeting">Hello . </div>
-<br>
-<div id="greeting2">Add yourself to the map by hitting "Center on your location" and the filling in your playa name and hit add my location </div>
-<div id="greeting3">You can consent to share your approximate or exact location with friends or with everyone</div>
-<br>
-<div id="greeting4">If facebook login might is not working properly, you might  still see another login buttons so also click it afterwards</div>
-<div id="greeting5">Your facebook friend's location display is currently pending Facebook's review and approval. Check again soon.</div>
 
 
-<button id="loginButton">Log In with Facebook</button>
-<button id="loginButton2">Log In with Facebook2</button>
-
-
-<fb:login-button
-        id="fbloginButton"
-        scope="public_profile,email,user_friends"
-        onlogin="checkLoginState();">
-</fb:login-button>
+<link rel="stylesheet" href="burner.css">
 
 
 
-<div id="loggedInContent" style="display: none;">
-    <!-- HTML Form for Lat/Long -->
-    <form id="locationForm">
 
-        <label for="playaName">Playa Name:</label>
-        <input type="text" id="playaName" name="playaName" required><br>
+    <!-- Add the Leaflet CSS and JavaScript links -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
 
-        <label for="latitude">Latitude:</label>
-        <input type="text" id="latitude" name="latitude" required><br>
-
-        <label for="longitude">Longitude:</label>
-        <input type="text" id="longitude" name="longitude" required><br>
-
-        <!-- Checkbox 1: Allow Others to See My Location -->
-        <label>
-            <input type="checkbox" id="allowVisible" name="allowVisible" >
-            Allow Everyone to See My Location (Leave unchecked - just your friends)
-        </label><br><br>
-
-        <!-- Checkbox 2: Use Approximate Location -->
-        <label>
-            <input type="checkbox" id="useApproximate" name="useApproximate" checked>
-            Use Approximate Location (for privacy reasons)
-        </label><br><br>
-        
-        <button type="submit">Add my location to the map</button>
-    </form>
-</div>
-
-<!-- Center Button -->
-<button id="centerButton">Center on My Location</button>
-<button id="centerPlayaButton">Center on Playa</button>
-<button id="loadEveryone">Load Everyone's Locations</button>
-
-
-<button id="getFriendsButton">Get Facebook Friends Location</button>
-
-
-
-<!-- Create a map container -->
-map:
-<div id="map"></div>
-<div id="mapContainer"></div>
-<style>
-    #mapContainer {
-        height: 500px;
-        width: 1000px;
-    }
-</style>
-
-
-<ul id="friendsList"></ul>
-
-
-<!-- Add the Leaflet CSS and JavaScript links -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""/>
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
-
-
-<script>
     
-   
-     
-</script>
+</head>
 
+
+<body>
+
+
+<div id="headerBar"><center>
+
+    <div id="head0" >
+        <table width=100% cellpadding=0 cellspacing=0 border=0 >
+            <tr><td class="head1">
+                <table border=0 cellpadding=0 cellspacing=0 >
+                    <tr><td class="head2">
+                        <!-- Spread the <img src="/images/heart.gif" border=0 > : -->
+                    </td><td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </td><td>
+                       
+                    </td><td>
+                        
+                    </td></tr></table>
+            </td><td class="headerLogin">
+                <table align=right border=0 cellpadding=0 cellspacing=0 >
+                    <tr><td class="head3">
+                        <div id="greeting">Hello . </div>
+                        -
+                        <!--
+                        <a href="/logout">Logout</a>
+                        -->
+                    </td><td class="head4">
+                        <img src=""
+                             id="headProfPic" vspace="1" >
+                    </td></tr></table>
+            </td></tr></table>
+    </div>
+
+    <div class="head5">
+        <table width=699 border=0 cellpadding=0 cellspacing=0 >
+            <tr><td width=403 >
+                <a href="" target="_parent"
+                ><img src="images/headerLogo2.jpg"
+                      alt="Not Burning Map" border=0 ></a>
+            </td><td width=170 ></td><td width=80 >
+                <!--
+                <a href="/map/"><img id="menuMap" border=0
+
+                                     src="/images/menu-map-active.jpg"
+                ></a>
+                -->
+            </td><td width=50 align=right >
+                <!--
+                <a href="/edit/"><img id="menuMap" border=0
+
+                                      src="/images/menu-edit.jpg"
+                                      onMouseOver="this.src='/images/menu-edit-over.jpg';"
+                                      onMouseOut="this.src='/images/menu-edit.jpg';"
+                ></a>
+                -->
+            </td><td width=75 align=right >
+                <!--
+                <a href="/tickets/"><img id="menuMap" border=0
+
+                                         src="/images/menu-ticket.jpg"
+                                         onMouseOver="this.src='/images/menu-ticket-over.jpg';"
+                                         onMouseOut="this.src='/images/menu-ticket.jpg';"
+                ></a>
+                -->
+            </td></tr></table>
+    </div>
+
+</center></div>
+
+
+<center>
+
+<div id="headBuff"></div>
+<center>
+    <div id="notifTitle" class="condensed">NOTIFICATIONS</div>
+
+   <div id="notif29" class="notifBox">
+        <div  id="TopText" style="text-align: left">
+            <div class="notifNote"  id="greeting2">Add yourself to the map by hitting "Center on your location" and the filling in your playa name and hit add my location </div>
+            <div class="notifNote"  id="greeting3">You can consent to share your approximate or exact location with friends or with everyone</div>
+        </div>
+    </div>
+
+    <div id="notif7" class="notifBox" >
+        <div class="notifNote"  id="greeting4">If facebook login might is not working properly, you might  still see another login buttons so also click it afterwards</div>
+        <div class="notifNote" id="greeting5">Your facebook friend's location display is currently pending Facebook's review and approval. Check again soon.</div>
+    </div>
+</center>
+
+    <div class="wBrn taL">
+        <div class="content" style="align-content: center">
+            
+            <br><br>
+        
+        <button id="loginButton">Log In with Facebook</button>
+        <button id="loginButton2">Log In with Facebook2</button>
+        
+        
+        <fb:login-button
+                id="fbloginButton"
+                scope="public_profile,email,user_friends"
+                onlogin="checkLoginState();">
+        </fb:login-button>
+        
+        
+        
+        <div id="loggedInContent" style="display: none;">
+            <!-- HTML Form for Lat/Long -->
+            <form id="locationForm">
+        
+                <label for="playaName">Playa Name:</label>
+                <input type="text" id="playaName" name="playaName" required><br>
+        
+                <label for="latitude">Latitude:</label>
+                <input type="text" id="latitude" name="latitude" required><br>
+        
+                <label for="longitude">Longitude:</label>
+                <input type="text" id="longitude" name="longitude" required><br>
+        
+                <!-- Checkbox 1: Allow Others to See My Location -->
+                <label>
+                    <input type="checkbox" id="allowVisible" name="allowVisible" >
+                    Allow Everyone to See My Location (Leave unchecked - just your friends)
+                </label><br>
+        
+                <!-- Checkbox 2: Use Approximate Location -->
+                <label>
+                    <input type="checkbox" id="useApproximate" name="useApproximate" checked>
+                    Use Approximate Location (for privacy reasons)
+                </label><br><br>
+                
+                <button type="submit">Add my location to the map</button>
+            </form>
+        </div>
+        
+        <!-- Center Button -->
+        <button id="centerButton">Center on My Location</button>
+        <button id="centerPlayaButton">Center on Playa</button>
+        <button id="loadEveryone">Load Everyone's Locations</button>
+        
+        
+        <button id="getFriendsButton">Get Facebook Friends Location</button>
+        </div>
+        
+        <div class="wBrn">
+            <center>
+            
+            <!-- Create a map container -->
+            
+            <div id="map"></div>
+            <div id="mapContainer"></div>
+            <style>
+                #mapContainer {
+                    height: 500px;
+                    width: 1000px;
+                }
+            </style>
+            
+            
+            <ul id="friendsList"></ul>
+            </center>
+        </div>
+        
+    </div>
+</center>
+    
+</body>
+</html>
