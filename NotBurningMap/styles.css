@@ -1,0 +1,79 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Header styles */
+header {
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Container styles */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Form styles */
+.form-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Input styles */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+/* Button styles */
+.button {
+  background-color: #444;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #333;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #444;
+  color: #fff;
+}
