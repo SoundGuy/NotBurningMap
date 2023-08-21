@@ -1,3 +1,21 @@
+<!doctype html><html xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <meta http-equiv="Content-Type" content="Text/HTML" />
+    <meta charset="UTF-8" />
+    <title>NOT BURNING MAP. A printable map of your pals not on the playa.</title>
+    <meta name="keywords"
+          content="Burner Map, Burning Man, Black Rock City, map,
+            facebook, playa, 2023, " />
+    <meta name="description"
+          content="Tracking down friends not at Black Rock City
+            used to be harder than cleaning playa dust out of
+            gold-sequined booty shorts. Now you can share your
+            location, ask your friends to do the same, then
+            don't go to playa." />
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="image_src" href="/images/logo2.png">
+
+
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp ,  } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
@@ -623,8 +641,27 @@
 
 </script>
 
+
+
 <link rel="stylesheet" href="burner.css">
- 
+
+
+
+
+    <!-- Add the Leaflet CSS and JavaScript links -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    
+</head>
+<body>
+
+
 <div id="greeting">Hello . </div>
 <br>
 <div id="greeting2">Add yourself to the map by hitting "Center on your location" and the filling in your playa name and hit add my location </div>
@@ -700,19 +737,6 @@ map:
 <ul id="friendsList"></ul>
 
 
-<!-- Add the Leaflet CSS and JavaScript links -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""/>
-<!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
 
-
-<script>
-    
-   
-     
-</script>
-
+</body>
+</html>
