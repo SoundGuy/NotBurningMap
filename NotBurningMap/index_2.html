@@ -113,6 +113,8 @@
                   // Friend is signed in
                   friendsSignedIn.push(friend);
                   await getFBUserData(friend);
+
+                  getFriendsButton.style.display = "none";
               } catch (error) {
                   // Friend is not signed in
               }
@@ -550,6 +552,8 @@
       fbUserID = response.authResponse.userID;
       console.log("fb user " + fbUserID + " token "  + fbaccessToken );
       fbloginButton2.style.display = "none";
+
+      getFriendsList();
       
   }
   
@@ -655,7 +659,7 @@
             Use Approximate Location (for privacy reasons)
         </label><br><br>
         
-        <button type="submit">Save</button>
+        <button type="submit">Add my location to the map</button>
     </form>
 </div>
 
