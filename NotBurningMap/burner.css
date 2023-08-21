@@ -363,7 +363,7 @@ table.borderless tr td {
     border: 0px none;
 }
 a#feedbackright, body > a#feedbackright {
-    background:url("https://BurnerMap.com/images/feedback_tab_white.png") no-repeat scroll 50% 50% #0066CC;
+    background:url("images/bg.jpg") no-repeat scroll 50% 50% #0066CC;
     display:block;
     height:90px;
     line-height:0;
@@ -389,13 +389,13 @@ a#feedbackright:hover, body > a#feedbackright:hover {
     background: url(https://BurnerMap.com/images/notificationBG.jpg);
     background-repeat: no-repeat;
     width: 900px;
-    height: 58px;
+    height: 70px;
     position: relative;
     display: block;
     margin-bottom: 20px;
 }
 .notifX {
-    width: 698px;
+    width: 900px;
     text-align: right;
     padding-top: 3px;
     padding-right: 3px;
